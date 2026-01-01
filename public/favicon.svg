@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- Background circle with gradient effect -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main background -->
+  <circle cx="128" cy="128" r="128" fill="url(#bgGradient)"/>
+  
+  <!-- Inner circle for contrast -->
+  <circle cx="128" cy="128" r="110" fill="none" stroke="#ffffff" stroke-width="4" opacity="0.3"/>
+  
+  <!-- Stylized "A" for AeroStart - represents a start/launch concept -->
+  <g transform="translate(128, 128)">
+    <!-- Left upward stroke -->
+    <path d="M -35 25 L -5 -35 L 35 25" stroke="#ffffff" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Horizontal crossbar -->
+    <line x1="-20" y1="-5" x2="20" y2="-5" stroke="#ffffff" stroke-width="12" stroke-linecap="round"/>
+    <!-- Bottom accent dot (represents start/launch) -->
+    <circle cx="0" cy="40" r="6" fill="#ffffff"/>
+  </g>
+</svg>

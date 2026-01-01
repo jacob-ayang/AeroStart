@@ -3,7 +3,7 @@
  * Centralized management of API endpoints, parameters, and response parsing for all search engines
  */
 
-export type SearchEngineType = 'Google' | 'Baidu' | 'Bing' | 'DuckDuckGo' | 'Bilibili';
+export type SearchEngineType = 'Google' | 'Baidu' | 'Bing' | 'DuckDuckGo' | 'Bilibili' | 'Yandex';
 
 export type RequestMethod = 'jsonp' | 'fetch';
 
@@ -72,6 +72,22 @@ export const searchEngineConfigs: Record<SearchEngineType, SearchEngineConfig> =
       // Bilibili returns: {code: 0, result: {tag: [{value: "suggestion text"}, ...]}}
       if (data.code === 0 && data.result && data.result.tag) {
         return data.result.tag.map((item: any) => item.value);
+      }
+      return [];
+    }
+  },
+
+  Yandex: {
+    name: 'Yandex',
+    method: 'jsonp',
+    urlTemplate: 'https://yandex.com/suggest/suggest-ya.cgi?part={query}&uil=en&v=3&callback={callback}',
+    parseResponse: (data: any) => {
+      // Yandex returns: [query, [suggestions]]
+      if (Array.isArray(data) && data.length > 1 && Array.isArray(data[1])) {
+        return data[1].map((item: any) => {
+          // Items can be strings or objects with a 'text' property
+          return typeof item === 'string' ? item : item.text || '';
+        }).filter((item: string) => item.length > 0);
       }
       return [];
     }
